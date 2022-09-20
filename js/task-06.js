@@ -2,38 +2,21 @@
 const blurActRef = document.querySelector('#validation-input');
 
 const inputLengthRef = blurActRef.getAttribute('data-length')
-console.log(inputLengthRef);
 
-blurActRef.addEventListener('blur', inputBlur); 
-
-function inputBlur(event) {
-
-    const isValid = event.currentTarget.value.length === inputLengthRef;
-    if (isValid) {
-        event.currentTarget.classList.add('valid');
-        event.currentTarget.classList.remove('invalid')
-        return;
+function hendLeClickBlur(event) {
+    const { dataset, value } = event.target;
+    const requiredLength = Number(dataset.length)
+    console.log('blur');
+    console.log(requiredLength);
+    console.log(value.length);
+    event.target.classList.remove('valid')
+    if (requiredLength === value.length) {
+        event.target.classList.add('valid');
+        event.target.classList.remove('invalid')
     } else {
-        event.currentTarget.classList.add('invalid');
-        event.currentTarget.classList.remove('valid')
-        return;
+        event.target.classList.remove('valid');
+        event.target.classList.add('invalid')
     }
 }
 
-
-
-
-
-
-// function inputBlur(event) {
-//     const inputRef = event.currentTarget.value === Number(inputRef);
-//     if (inputRef === event.currentTarget.value) {
-//         event.currentTarget.classList.add('valid');
-//         event.currentTarget.classList.remove('invalid')
-//         return
-//         } else {
-//             event.currentTarget.classList.add('invalid');
-//             event.currentTarget.classList.remove('valid')
-//             return
-//          }
-//     }
+blurActRef.addEventListener('blur', hendLeClickBlur);
